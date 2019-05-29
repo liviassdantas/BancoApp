@@ -7,4 +7,18 @@
     <string name="senha">Senha</string>
     <string name="logar">Entrar</string>
     <string name="appos">AppOS</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cadastro">Cadastrar Conta</string>
+    <string name="nome">Nome</string>
+    <string name="email">Email</string>
+    <string name="user">Nome de Usuário</string>
+    <string name="vip">Você é Vip?</string>
+    <string name="sim">sim</string>
+    <string name="nao">não</string>
+    <string name="cadastrar">Concluir</string>
+    <string name="departamento">Departamento</string>
+    <string name="debito_saldo">debito</string>
+    <string name="data">data</string>
 </resources>

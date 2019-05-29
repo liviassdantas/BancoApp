@@ -7,6 +7,8 @@
     <color name="orangeDark">#e54304</color>
     <color name="orangePrimary">#f47100</color>
     <color name="redAccent">#FFEBEE</color>
+    <color name="red">#D50000</color>
+    <color name="green">#09af00</color>
     <color name="white">#ffff</color>
     <color name="grey">#FAFAFA</color>
     <color name="preto">#000000</color>
