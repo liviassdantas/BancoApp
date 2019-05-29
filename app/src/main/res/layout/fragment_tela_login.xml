@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/txtbemvindo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="@string/bemvindo"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="27sp" />
+    <TableRow>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimaryDark">
+
+            <EditText
+                android:id="@+id/fragLogin"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="110dp"
+                android:layout_marginLeft="110dp"
+                android:backgroundTint="@color/orangePrimary"
+                android:hint="@string/login"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark"
+                tools:targetApi="lollipop" />
+        </android.support.design.widget.TextInputLayout>   
+    </TableRow>
+    <TableRow>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimaryDark">
+
+            <EditText
+                android:id="@+id/fragSenha"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="110dp"
+                android:layout_marginLeft="110dp"
+                android:backgroundTint="@color/orangePrimary"
+                android:inputType="numberPassword"
+                android:hint="@string/senha"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark"
+                tools:targetApi="lollipop" />
+        </android.support.design.widget.TextInputLayout>
+    </TableRow>
+    </TableLayout>
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnlogar"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btnredondo"
+        android:text="@string/logar"
+        android:textColor="@color/colorPrimaryDark" />
+</LinearLayout>

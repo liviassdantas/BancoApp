@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BancoApp</string>
+    <string name="abrir_drawer">Abrir</string>
+    <string name="fechar_drawer">Fechar</string>
+    <string name="bemvindo">Seja Bem Vindo!</string>
+    <string name="login">Login</string>
+    <string name="senha">Senha</string>
+    <string name="logar">Entrar</string>
+    <string name="appos">AppOS</string>
+</resources>
