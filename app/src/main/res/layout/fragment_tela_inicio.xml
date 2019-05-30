@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TableRow
+            android:background="@color/roxinho"
+            android:layout_marginTop="200dp">
+            <TextView
+                android:id="@+id/saldo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/saldo"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/grey"
+                android:textSize="40sp"
+                android:layout_marginStart="10dp" />
+        </TableRow>
+        <TableRow
+            android:background="@color/colorAccent">
+            <TextView
+                android:id="@+id/deposito"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/deposito"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/grey"
+                android:textSize="40sp"
+                android:layout_marginStart="10dp" />
+        </TableRow>
+        <TableRow
+            android:background="@color/colorPrimary">
+            <TextView
+                android:id="@+id/extrato"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/extrato"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/grey"
+                android:textSize="40sp"
+                android:layout_marginStart="10dp" />
+        </TableRow>
+        <TableRow
+            android:background="@color/purplenotsodark">
+            <TextView
+                android:id="@+id/saque"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/saque"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/grey"
+                android:textSize="40sp"
+                android:layout_marginStart="10dp" />
+        </TableRow>
+        <TableRow
+            android:background="@color/colorPrimaryDark">
+            <TextView
+                android:id="@+id/transferencia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/transferencia"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/grey"
+                android:textSize="40sp"
+                android:layout_marginStart="10dp" />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

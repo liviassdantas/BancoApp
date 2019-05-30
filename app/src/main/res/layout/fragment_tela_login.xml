@@ -70,4 +70,13 @@
         android:background="@drawable/btnredondo"
         android:text="@string/logar"
         android:textColor="@color/colorPrimaryDark" />
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnTemConta"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btnredondo"
+        android:text="@string/temconta"
+        android:textColor="@color/colorPrimaryDark" />
 </LinearLayout>

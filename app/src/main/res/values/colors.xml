@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#dd0074</color>
+    <color name="purpleLight">#ee0290</color>
+    <color name="purplenotsodark">#c7006e</color>
     <color name="colorPrimaryDark">#880061</color>
+    <color name="roxinho">#ef4fa6</color>
     <color name="colorAccent">#ee0290</color>
     <color name="orangeAccent">#ff9e22</color>
     <color name="orangeDark">#e54304</color>

@@ -1,4 +1,4 @@
-package com.example.bancoapp;
+package com.example.bancoapp.Fragmentos;
 
 
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.bancoapp.R;
 
 public class TelaLogin extends Fragment {
     private TextView txtBemvindo;

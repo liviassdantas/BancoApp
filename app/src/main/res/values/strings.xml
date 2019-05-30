@@ -13,7 +13,7 @@
     <string name="cadastro">Cadastrar Conta</string>
     <string name="nome">Nome</string>
     <string name="email">Email</string>
-    <string name="user">Nome de Usuário</string>
+    <string name="user">Conta Corrente</string>
     <string name="vip">Você é Vip?</string>
     <string name="sim">sim</string>
     <string name="nao">não</string>
@@ -21,4 +21,10 @@
     <string name="departamento">Departamento</string>
     <string name="debito_saldo">debito</string>
     <string name="data">data</string>
+    <string name="saldo">Saldo</string>
+    <string name="extrato">Extrato</string>
+    <string name="transferencia">Transferência</string>
+    <string name="temconta">Criar</string>
+    <string name="saque">Saque</string>
+    <string name="deposito">Depósito</string>
 </resources>
