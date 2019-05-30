@@ -79,6 +79,7 @@
                     android:layout_marginLeft="110dp"
                     android:backgroundTint="@color/orangePrimary"
                     android:hint="@string/user"
+                    android:maxLength="5"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     tools:targetApi="lollipop" />
@@ -91,8 +92,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorPrimaryDark">
-
-
                 <EditText
                     android:id="@+id/fragCadastroSenha"
                     android:layout_width="150dp"
@@ -101,6 +100,7 @@
                     android:layout_marginLeft="110dp"
                     android:backgroundTint="@color/orangePrimary"
                     android:hint="@string/senha"
+                    android:maxLength="4"
                     android:inputType="numberPassword"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
@@ -109,7 +109,7 @@
         </TableRow>
         <TableRow>
             <TextView
-                android:id="@+id/vip"
+                android:id="@+id/txtvip"
                 android:text="@string/vip"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"

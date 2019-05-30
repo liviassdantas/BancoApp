@@ -4,20 +4,39 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+//nome da entidade/classe
 @Entity(tableName = "conta")
 public class ContaRoom {
-    @PrimaryKey  private Integer numContaCorrente;
+    //campos
+    @PrimaryKey  private Long numContaCorrente;
     @ColumnInfo(name = "senha") private Integer senhaApp;
     @ColumnInfo(name = "cliente") private String Cliente;
     @ColumnInfo(name = "email") private String email;
     @ColumnInfo(name = "vip") private Boolean ehVip;
     @ColumnInfo(name = "saldo") private Double saldo;
 
-    public Integer getNumContaCorrente() {
+    //construtor vazio
+    public ContaRoom(){}
+
+    //construtor incial
+    public ContaRoom(Long numContaCorrente, Integer senhaApp,
+                     String cliente, String email, Boolean ehVip,
+                     Double saldo) {
+        this.numContaCorrente = numContaCorrente;
+        this.senhaApp = senhaApp;
+        Cliente = cliente;
+        this.email = email;
+        this.ehVip = ehVip;
+        this.saldo = saldo;
+    }
+
+
+    //getters e setters
+    public Long getNumContaCorrente() {
         return numContaCorrente;
     }
 
-    public void setNumContaCorrente(Integer numContaCorrente) {
+    public void setNumContaCorrente(Long numContaCorrente) {
         this.numContaCorrente = numContaCorrente;
     }
 

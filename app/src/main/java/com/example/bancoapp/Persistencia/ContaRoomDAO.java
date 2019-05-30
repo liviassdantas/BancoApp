@@ -8,6 +8,9 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.support.v4.view.ViewPager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Dao
 public interface ContaRoomDAO {
 @Insert
@@ -18,6 +21,12 @@ void update(ContaRoom contaRoom);
 
 @Delete
 void delete(ContaRoom contaRoom);
+
+@Query("SELECT * FROM conta")
+    List<ContaRoom> getAll();
+
+@Query("SELECT * FROM conta WHERE numContaCorrente = :id")
+    ContaRoom getContaById(Long id);
 
 
 

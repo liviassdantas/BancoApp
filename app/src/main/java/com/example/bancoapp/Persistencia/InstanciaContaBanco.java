@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 
 public class InstanciaContaBanco {
         private Context context;
-        private contaDatabase contadb = Room.databaseBuilder(
+        public final contaDatabase contadb = Room.databaseBuilder(
             context, contaDatabase.class,"conta_db"
         ).build();
 }
