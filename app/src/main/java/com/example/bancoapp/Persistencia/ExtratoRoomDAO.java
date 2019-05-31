@@ -5,15 +5,15 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import java.util.List;
+
 @Dao
-public interface ExtratoRoomDAO {
+public abstract class ExtratoRoomDAO {
 
     @Insert
-    Long insertExtrato(Extrato extrato);
+    public abstract Long insertExtrato(Extrato extrato);
 
-    @Update
-    Long updateExtrato(Extrato extrato);
 
-    @Query("SELECT * FROM Extrato WHERE idExtrato =:id")
-    Extrato getExtratoByID(Long id);
+    @Query("SELECT * FROM extrato WHERE idConta = :idConta")
+    public abstract List<Extrato> getByConta (long idConta);
 }

@@ -27,11 +27,13 @@ public class Cadastro extends Fragment {
     private Button btnvipsim;
     private Button btnvipnao;
     private Button btnconcluir;
-    private ContaRoom novaconta;
+    private contaDatabase banco;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        banco = contaDatabase.getInstance(getContext());
         //view
         View view = inflater.inflate(R.layout.fragment_cadastro, container, false);
 
@@ -47,51 +49,62 @@ public class Cadastro extends Fragment {
         btnconcluir = view.findViewById(R.id.btnCadastrar);
 
 
-
         //Btn Salvar
         btnconcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 if(contacorrente == null) {
-                     novaconta = new ContaRoom();
-                     novaconta.setCliente(nome.getText().toString());
-                     novaconta.setEmail(email.getText().toString());
-                     novaconta.setNumContaCorrente((long) Integer.parseInt(contacorrente.getText().toString()));
-                     novaconta.setSenhaApp(Integer.parseInt(senha.getText().toString()));
-                     if (btnvipsim.isSelected()) {
-                         novaconta.setEhVip(true);
-                     } else {
-                         novaconta.setEhVip(false);
-                     }
-                     if (btnvipnao.isSelected()) {
-                         novaconta.setEhVip(false);
-                     } else {
-                         novaconta.setEhVip(true);
-                     }
-                     novaconta.setSaldo(null);
 
-                     //Thread para inserir no banco
-                      new Thread(new Runnable() {
-                          @Override
-                          public void run() {
-                              Long idconta = contaDatabase.getInstance(getContext())
-                                      .contaDao()
-                                      .insert(novaconta);
-                              Toast.makeText(getContext(), "Conta Criada!",Toast.LENGTH_SHORT).show();
-                              getFragmentManager().beginTransaction()
-                                      .replace(R.id.ContainerFragment, new TelaInicio(), "TelaInicio")
-                                      .commit();
-                          }
-                      }).start();
+               final ContaRoom novaconta = new ContaRoom();
+                novaconta.setCliente(nome.getText().toString());
+                novaconta.setEmail(email.getText().toString());
+                novaconta.setNumContaCorrente((long) Integer.parseInt(contacorrente.getText().toString()));
+                novaconta.setSenhaApp(Integer.parseInt(senha.getText().toString()));
+                if (btnvipsim.isSelected()) {
+                    novaconta.setEhVip(true);
+                } else {
+                    novaconta.setEhVip(false);
+                }
+                if (btnvipnao.isSelected()) {
+                    novaconta.setEhVip(false);
+                } else {
+                    novaconta.setEhVip(true);
+                }
+                novaconta.setSaldo(0.0);
 
-                 }else{
-                     Toast.makeText(getContext(),
-                             "Usuário já cadastrado, favor, efetuar login", Toast.LENGTH_SHORT).show();
-                     assert getFragmentManager() != null;
-                     getFragmentManager().beginTransaction()
-                             .replace(R.id.ContainerFragment, new TelaLogin(), "TelaLogin")
-                             .commit();
-                 }
+                //Thread para inserir no banco
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (banco.contaDao().insert(novaconta)) {
+
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getContext(), "Conta Criada!", Toast.LENGTH_SHORT).show();
+                                    assert getFragmentManager() != null;
+                                    getFragmentManager().beginTransaction()
+                                            .replace(R.id.ContainerFragment, new TelaInicio(), "TelaInicio")
+                                            .commit();
+                                }
+                            });
+
+                        } else {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getContext(),
+                                            "Usuário já cadastrado, favor, efetuar login", Toast.LENGTH_SHORT).show();
+
+                                    assert getFragmentManager() != null;
+                                    getFragmentManager().beginTransaction()
+                                            .replace(R.id.ContainerFragment, new TelaLogin(), "TelaLogin")
+                                            .commit();
+                                }
+                            });
+                        }
+                    }
+                }).start();
+
             }
         });
 

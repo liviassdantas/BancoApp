@@ -3,12 +3,12 @@
     <group>
         <item android:id="@+id/item1"
             android:icon="@android:drawable/ic_menu_edit"
-            android:title="Editar Tema"
+            android:title="Visita Gerente"
 
             />
         <item android:id="@+id/item2"
             android:icon="@android:drawable/ic_delete"
-            android:title="item 2"/>
+            android:title="Sair"/>
 
     </group>
 </menu>

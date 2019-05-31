@@ -5,11 +5,18 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <!--Layout para organizar os cards-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cardViewExtrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

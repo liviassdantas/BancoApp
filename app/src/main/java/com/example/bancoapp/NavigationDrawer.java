@@ -1,5 +1,7 @@
 package com.example.bancoapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -12,13 +14,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.bancoapp.Persistencia.ContaRoom;
+import com.example.bancoapp.Persistencia.contaDatabase;
+
 import com.example.bancoapp.Fragmentos.TelaLogin;
+import com.example.bancoapp.Prefs.Preferencia;
 
 public class NavigationDrawer extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
     private DrawerLayout drwlayout;
     private NavigationView nvgtview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +69,40 @@ public class NavigationDrawer extends AppCompatActivity implements
         switch (menuItem.getItemId()) {
             //caso item 1
             case R.id.item1: {
-                Toast.makeText(this, "Menu 1", Toast.LENGTH_SHORT).show();
-                break;
+                Long numConta = Preferencia.getConta(getApplicationContext());
+                final ContaRoom conta = contaDatabase.getInstance(getApplicationContext()).contaDao().getContaById(numConta);
+                if (conta.getEhVip()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    builder.setTitle("Visita Gerente");
+                    builder.setMessage("Deseja Confirmar a Visita? \n Será debitado R$50.00 de sua conta!");
+                    builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    conta.visitaGerente();
+                                    contaDatabase.getInstance(getApplicationContext()).contaDao().update(conta);
+                                }
+                            }).start();
+
+                            Toast.makeText(getApplicationContext(), "Visita Confirmada", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton("Sair", null);
+                    builder.setCancelable(false);
+                    builder.create().show();
+
+                }else{
+                    Toast.makeText(getApplicationContext(), "Função indisponivel", Toast.LENGTH_SHORT).show();
+                }
             }
             //caso item 2
             case R.id.item2: {
-                Toast.makeText(this, "Menu 2", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.ContainerFragment, new TelaLogin(), "TelaLogin")
+                        .commit();
                 break;
             }
             default: {

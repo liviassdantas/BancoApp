@@ -27,4 +27,5 @@
     <string name="temconta">Criar</string>
     <string name="saque">Saque</string>
     <string name="deposito">Depósito</string>
+    <string name="valordeposito">Valor que deseja depositar</string>
 </resources>

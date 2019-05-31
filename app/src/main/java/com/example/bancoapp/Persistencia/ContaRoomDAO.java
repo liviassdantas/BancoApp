@@ -5,6 +5,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Transaction;
 import android.arch.persistence.room.Update;
 import android.support.v4.view.ViewPager;
 
@@ -12,22 +13,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Dao
-public interface ContaRoomDAO {
-@Insert
-Long insert(ContaRoom contaRoom);
+public abstract class ContaRoomDAO {
 
-@Update
-void update(ContaRoom contaRoom);
+    @Insert()
+    protected abstract long _insert(ContaRoom contaRoom);
 
-@Delete
-void delete(ContaRoom contaRoom);
+    public long insertReturn(ContaRoom conta) {
+        return _insert(conta);
+    }
 
-@Query("SELECT * FROM conta")
-    List<ContaRoom> getAll();
+    public boolean insert(ContaRoom conta) {
+        return _insert(conta) > 0;
+    }
 
-@Query("SELECT * FROM conta WHERE numContaCorrente = :id")
-    ContaRoom getContaById(Long id);
 
+    @Update
+    public abstract void update(ContaRoom contaRoom);
+
+    @Delete
+    public abstract void delete(ContaRoom contaRoom);
+
+
+    @Transaction
+    @Query("SELECT * FROM conta")
+    public abstract List<ContaExtrato> getAll();
+
+    public List<ContaRoom> getConta(List<ContaExtrato> list) {
+        List<ContaRoom> retorno = new ArrayList<>();
+        if (list != null) {
+            for (ContaExtrato ce : list) {
+                ce.getConta().setExtrato(ce.getExtrato());
+                retorno.add(ce.getConta());
+            }
+        }
+
+        return retorno;
+    }
+
+    @Query("SELECT * FROM conta WHERE numContaCorrente = :id")
+    public abstract ContaRoom getContaById(Long id);
+
+    @Query("SELECT * FROM conta WHERE numContaCorrente = :conta AND senha= :senha")
+    public abstract ContaRoom getContaByContaSenha(Long conta, Integer senha);
 
 
 }

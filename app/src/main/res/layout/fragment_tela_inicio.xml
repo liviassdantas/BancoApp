@@ -11,8 +11,7 @@
         android:orientation="horizontal">
 
         <TableRow
-            android:background="@color/roxinho"
-            android:layout_marginTop="200dp">
+            android:background="@color/roxinho">
             <TextView
                 android:id="@+id/saldo"
                 android:layout_width="match_parent"

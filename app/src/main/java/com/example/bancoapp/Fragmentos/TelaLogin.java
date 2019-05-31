@@ -12,37 +12,40 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bancoapp.Persistencia.ContaRoom;
+import com.example.bancoapp.Persistencia.ContaRoomDAO;
 import com.example.bancoapp.Persistencia.contaDatabase;
+import com.example.bancoapp.Prefs.Preferencia;
 import com.example.bancoapp.R;
 
 import java.util.ArrayList;
 
 public class TelaLogin extends Fragment {
-    private TextView txtBemvindo;
     private EditText login;
     private EditText senha;
-    private Button   btnlogar;
-
+    private Button btnlogar;
+    private Button btnCriar;
+    private contaDatabase banco;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        banco = contaDatabase.getInstance(getContext());
         // view
         View view = inflater.inflate(R.layout.fragment_tela_login, container, false);
 
         //elementos
-        txtBemvindo = view.findViewById(R.id.txtbemvindo);
         login = view.findViewById(R.id.fragLogin);
         senha = view.findViewById(R.id.fragSenha);
         btnlogar = view.findViewById(R.id.btnlogar);
-        final contaDatabase banco = (contaDatabase) contaDatabase.getInstance(getContext()).contaDao();
+        btnCriar = view.findViewById(R.id.btnTemConta);
 
         //testando se o login/conta tem 5 dígitos
         login.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasfocus) {
-                if (!hasfocus){
-                    if (login.getText().length()<5){
+                if (!hasfocus) {
+                    if (login.getText().length() < 5) {
                         login.setError("Conta Inválida");
                     }
 
@@ -55,8 +58,8 @@ public class TelaLogin extends Fragment {
         senha.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasfocus2) {
-                if(!hasfocus2){
-                    if (senha.getText().length()<4){
+                if (!hasfocus2) {
+                    if (senha.getText().length() < 4) {
                         senha.setError("Senha inválida");
                     }
                 }
@@ -68,25 +71,48 @@ public class TelaLogin extends Fragment {
         btnlogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContaRoom conta = (ContaRoom) banco.contaDao().getAll();
-                Long loginv = Long.parseLong(login.getText().toString());
-                Integer senhav = Integer.parseInt(senha.getText().toString());
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Long loginv = Long.parseLong(login.getText().toString());
+                        Integer senhav = Integer.parseInt(senha.getText().toString());
+                        ContaRoom conta = banco.contaDao().getContaByContaSenha(loginv, senhav);
+                        if (conta == null) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getContext(), "Usuario ou senha Invalida!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Preferencia.setConta(getActivity().getApplicationContext(),conta.getNumContaCorrente());
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    getFragmentManager().beginTransaction()
+                                            .replace(R.id.ContainerFragment, new TelaInicio(), "Inicio")
+                                            .commit();
+                                }
+                            });
 
-                //testando se a conta e o id estão cadastrados no banco
-                if (loginv.equals(conta.getNumContaCorrente())){
-                    if (senhav.equals(conta.getSenhaApp())){
-                        assert getFragmentManager() != null;
-                        getFragmentManager().beginTransaction()
-                            .replace(R.id.ContainerFragment, new TelaInicio(), "TelaInicio")
-                            .commit();
-                    }else{
-                        Toast.makeText(getContext(), "Senha Incorreta", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
-                }else{
-                        Toast.makeText(getContext(),"Numero de conta incorreto", Toast.LENGTH_SHORT).show();
-                }
+                }).start();
+
             }
         });
+
+
+        btnCriar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.ContainerFragment, new Cadastro(), "Cadastro")
+                        .commit();
+            }
+        });
+
         return view;
     }
 
